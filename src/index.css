@@ -21,12 +21,75 @@ code {
   monospace;
 }
 
+.hero p {
+  margin-bottom: 0;
+}
+
+ul {
+  list-style: none;
+}
+
 .App {
   color: white;
   background-color: #121212;
   min-height: 100vh;
 }
 
+.start {
+  color: #f31caa;
+}
+
+.start:hover {
+  text-decoration: none;
+  color: #ad3eff;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
 .footer {
   color: gray;
+}
+
+.request p {
+  margin-bottom: 0;
+  padding-right: 50px;
+}
+
+.title {
+  font-size: 70px;
+  font-weight: 700;
+}
+
+.container-img {
+  width: 80%;
+}
+
+img {
+  max-width: 100%;
+}
+
+.search {
+  background-color: #121212;
+  color: gray;
+  border-radius: 999px;
+  border-color: 1px solid gray;
+  padding: 7px 30px;
+  position: relative;
+}
+
+.icon-bar {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  color: gray;
+  padding-left: 210px;
+}
+
+.rounded-pers {
+  border-radius: 22px;
+  height: 400px;
+}
+
+.request {
+  color: rgb(179, 179, 179);
 }
