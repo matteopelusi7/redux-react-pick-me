@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiOutlineFileSearch } from "react-icons/ai";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from '../redux/reducers/api-reducer';
 
 const HomeBody = () => {
+
+  const {photos} = useSelector((state) => state)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchData('photos'))
+  }, [])
+  
   return (
-    <div className='container my-5'>
+    <div className='container my-5 pb-5'>
       <div className='px-4 mt-3 row d-flex justify-content-between align-items-center'>
         <div className='col-8'>
           <h3 className='fs-1'>Search your photos</h3>
