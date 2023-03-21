@@ -1,7 +1,8 @@
 import React from 'react'
 import logo from '../images/logo.svg'
-import cart from '../images/cart.svg'
 import { Link } from 'react-router-dom'
+import { ReactComponent as CartIcon } from "../images/cart.svg";
+
 
 const Header = () => {
   return (
@@ -12,7 +13,7 @@ const Header = () => {
                     <img src={logo} alt="logo" />
                 </div>
                 <Link to='/checkout'>
-                    <img src={cart} alt="cart" />
+                    <CartIcon />
                 </Link>
             </div>
         </div>

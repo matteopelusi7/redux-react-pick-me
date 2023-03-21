@@ -3,7 +3,7 @@ import logo_footer from '../images/logo-footer.svg'
 
 const Footer = () => {
   return (
-    <div className='container my-5'>
+    <div className='container py-5'>
         <div className='d-flex align-items-center gap-3'>
             <div>
                 <img src={logo_footer} alt="" width='80px' />
