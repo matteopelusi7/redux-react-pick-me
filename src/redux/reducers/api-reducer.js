@@ -11,6 +11,12 @@ const initialState = {
     remaining: 0,
     total: 50
   },
+  query: {
+    path: "",
+    itemPerPage: null,
+    type: "",
+    query: ""
+  },
   photos: []
 }
 
@@ -41,7 +47,10 @@ export const apiSlice = createSlice({
       state.rate_limit = {
         ...action.payload
       }
-    } 
+    },
+    saveQuery: (state, action) => {
+      state.query = {...action.payload}
+    },
   },
 })
 
@@ -51,6 +60,9 @@ export const fetchData = (path) => async (dispatch) => {
   try {
     const response = await instance.get(path)
     dispatch(saveData(response.data))
+    if (response?.data?.total === 0) {
+      dispatch(catchError(["Nessun Elemento corrisponde alla ricerca"]));
+    }
     dispatch(checkRateLimiter({
       total: response.headers['x-ratelimit-limit'],
       remaining: response.headers['x-ratelimit-remaining'],
@@ -61,6 +73,6 @@ export const fetchData = (path) => async (dispatch) => {
   dispatch(stopLoading())
 }
 
-export const { startLoading, stopLoading, saveData, catchError, cleanError, checkRateLimiter } = apiSlice.actions
+export const { startLoading, stopLoading, saveData, catchError, cleanError, checkRateLimiter, saveQuery } = apiSlice.actions
 
 export default apiSlice.reducer

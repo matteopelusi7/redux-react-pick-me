@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../redux/reducers/api-reducer';
+import { catchError, fetchData, saveQuery } from '../redux/reducers/api-reducer';
 import Card from './Card';
 
 const HomeBody = () => {
 
-  const { photos, error, loading, rate_limit } = useSelector((state) => state.photos)
+  const { photos, error, loading, rate_limit, query: lastSearch } = useSelector((state) => state.photos)
   const dispatch = useDispatch()
 
   const[itemPerPage, setItemPerPage] = useState(12)
@@ -14,23 +14,38 @@ const HomeBody = () => {
 
   const searchPhoto = (page = 1) => {
     fetchPhotos('search', page)
-    console.log(photos)
   }
 
   const fetchPhotos = (type = 'latest', page = 1) => {
     let apiUrl = null;
 
     if(type === 'search') {
-      apiUrl = `/search/photos?query=${query}&`
+      if(query && query.length > 1 && query !== ' ') {
+        apiUrl = `/search/photos?query=${query}&`
+      } else {
+        dispatch(catchError(['Inserisci almeno un carattere']))
+        return
+      }
     } else {
       apiUrl = 'photos?'
     }
 
     dispatch(fetchData(`${apiUrl}per_page=${itemPerPage}&page=${page}`))
+
+    dispatch(saveQuery({
+      path: `${apiUrl}`.trim(),
+      itemPerPage,
+      type,
+      query,
+    }))
   }
 
   useEffect(() => {
-    fetchPhotos()
+    if(!lastSearch.query) {
+      fetchPhotos()
+    } else {
+      fetchPhotos(lastSearch.type)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemPerPage])
   
@@ -50,9 +65,9 @@ const HomeBody = () => {
           <p className='fs-6'>{` Richieste: ${rate_limit.remaining}/${rate_limit.total} `}</p>
         </div>
         <div className='mt-5 d-flex flex-wrap'>
-          { !loading && !error.status && photos.length
-          > 0 ? (
-            photos.map((el) => {
+          { !loading && !error.status && (photos?.length > 0 || photos?.results?.length > 0)
+           ? (
+            (photos?.results ? photos.results : photos).map((el) => {
               return <Card key={el.id} {...el} />
             })
           ) : !loading && error.status ? (
