@@ -8,7 +8,7 @@ const initialState = {
     message: ''
   },
   rate_limit: {
-    remaining: null,
+    remaining: 0,
     total: 50
   },
   photos: []
