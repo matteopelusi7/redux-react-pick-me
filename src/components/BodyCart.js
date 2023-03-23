@@ -2,6 +2,16 @@ import React from 'react'
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
 import { cleanCart, removeFromCart } from '../redux/reducers/cart-reducer'
+import { Formik } from 'formik';
+
+const initialValue = {
+    name: '',
+    cognome: '',
+    card: '',
+    address: '',
+    civico: '',
+    cap: ''
+}
 
 const BodyCart = () => {
 
@@ -43,25 +53,45 @@ const BodyCart = () => {
                 })}
             </div>
             
-            <div className='col-6 cart-pay p-5 d-flex align-center flex-column justify-content-evenly gap-3'>
-                <h4 className='pb-3'>Dati di pagamento</h4>
-                <div className='d-flex gap-3'>
-                    <input type="text" name="" value="" placeholder='Nome' onChange={(e) => {return}} />
-                    <input type="text" name="" value="" placeholder='Cognome' onChange={(e) => {return}} />
-                </div>
-                <div>
-                    <input type="text" name="" value="" placeholder='Carta di Credito' onChange={(e) => {return}} />
-                </div>
-                <div className='d-flex gap-3 flex-wrap'>
-                    <input type="text" name="" value="" placeholder='Indirizzo' onChange={(e) => {return}} />
-                    <input type="text" name="" value="" placeholder='Numero' onChange={(e) => {return}} />
-                    <input type="text" name="" value="" placeholder='CAP' onChange={(e) => {return}} />
-                </div>
-                <div className='pt-3 d-flex align-center payment justify-content-between'>
-                    <p className='mb-0 fs-4'>{total} €</p>
-                    <button type="">Procedi all'acquisto</button>
-                </div>
-            </div>
+            <Formik initialValues={initialValue} onSubmit={(values, {setSubmitting}) => setTimeout(() => {
+                    setSubmitting(true)
+                    alert(JSON.stringify(values))
+                    setSubmitting(false)
+                }, 500)} >
+                {
+                    (
+                        {
+                            values,
+                            handleChange,
+                            handleSubmit,
+                            handleBlur,
+                            isSubmitting,
+                            isValid,
+                            dirty
+                        }
+                    ) => (
+                        <form onSubmit={handleSubmit} className='col-6 cart-pay p-5 d-flex align-center flex-column justify-content-evenly gap-3'>
+                            <h4 className='pb-3'>Dati di pagamento</h4>
+                            <div className='d-flex gap-3'>
+                                <input type="text" name="name" onBlur={handleBlur} value={values.name} placeholder='Nome' onChange={handleChange} />
+                                <input type="text" name="cognome" onBlur={handleBlur} value={values.cognome} placeholder='Cognome' onChange={handleChange} />
+                            </div>
+                            <div>
+                                <input type="text" name="card" onBlur={handleBlur} value={values.card} placeholder='Carta di Credito' onChange={handleChange} />
+                            </div>
+                            <div className='d-flex gap-3 flex-wrap'>
+                                <input type="text" name="address" onBlur={handleBlur} value={values.address} placeholder='Indirizzo' onChange={handleChange} />
+                                <input type="text" name="civico" onBlur={handleBlur} value={values.civico} placeholder='Numero' onChange={handleChange} />
+                                <input type="text" name="cap" onBlur={handleBlur} value={values.cap} placeholder='CAP' onChange={handleChange} />
+                            </div>
+                            <div className='pt-3 d-flex align-center payment justify-content-between'>
+                                <p className='mb-0 fs-4'>{total} €</p>
+                                <button type="">Procedi all'acquisto</button>
+                            </div>
+                        </form>
+                    )
+                }
+            </Formik>
         </div>
     </div>
   )

@@ -3,15 +3,14 @@ import logo from '../images/logo.svg'
 import { Link } from 'react-router-dom'
 import { ReactComponent as CartIcon } from "../images/cart.svg";
 
-
 const Header = () => {
   return (
     <div className='container'>
         <div className='row col-12'>
             <div className='d-flex justify-content-between my-4'>
-                <div>
+                <Link to='/'>
                     <img src={logo} alt="logo" />
-                </div>
+                </Link>
                 <Link to='/checkout'>
                     <CartIcon />
                 </Link>

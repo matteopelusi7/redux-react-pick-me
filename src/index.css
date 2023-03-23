@@ -205,3 +205,17 @@ img {
 .payment p {
   font-weight: 700;
 }
+
+.payment button:hover {
+  text-decoration: none;
+  background-color: #ad3eff;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.remove-item:hover, .category:hover {
+  text-decoration: none;
+  color: #ad3eff;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
