@@ -1,7 +1,8 @@
 import React from 'react'
-import { ReactComponent as CartIcon } from "../images/purple-cart.svg";
+// import { ReactComponent as CartIcon } from "../images/purple-cart.svg";
 import { addSingleItemToCart } from '../redux/reducers/cart-reducer';
 import { useDispatch } from 'react-redux';
+import { FaShoppingCart } from "react-icons/fa";
 
 const Card = ({urls, likes, id}) => {
 
@@ -17,7 +18,9 @@ const Card = ({urls, likes, id}) => {
               likes,
               url: urls.full
             }))}>
-                <CartIcon />
+              <div className='img-cart-3'>
+                <FaShoppingCart />
+              </div>
             </button>
         </div>
     </div>

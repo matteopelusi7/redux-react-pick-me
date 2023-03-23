@@ -23,14 +23,14 @@ const BodyCart = () => {
         <div className='row mx-5'>
             <h2 className='cart-title col-12'>Carrello</h2>
         </div>
-        <div className='row px-4 my-4 d-flex justify-content-between gap-3'>
+        <div className='row px-4 my-4 d-flex justify-content-between'>
             <div className='col-12 col-md-6 cart-collect d-flex flex-column p-3 mb-3'>
                 <button className='remove-all pb-3' onClick={() => dispatch(cleanCart())}>
                     <p className='text-end p-3 category'>Remove all</p>
                 </button>
                 {cart.map((el) => {
                     return (
-                        <div className='container-buy d-flex justify-content-between pb-4'>
+                        <div key={el.id} className='container-buy d-flex justify-content-between pb-4'>
                             <div className='d-flex align-items-center gap-3'>
                                 <div className='pr-3'>
                                     <img className='img-cart' src={el.url} height={'80px'} width={'150px'} alt="" />
@@ -84,8 +84,8 @@ const BodyCart = () => {
                                 <input type="text" name="civico" onBlur={handleBlur} value={values.civico} placeholder='Numero' onChange={handleChange} />
                                 <input type="text" name="cap" onBlur={handleBlur} value={values.cap} placeholder='CAP' onChange={handleChange} />
                             </div>
-                            <div className='pt-3 d-flex align-center payment justify-content-between flex-wrap gap-3'>
-                                <p className='mb-0 fs-4'>{total} €</p>
+                            <div className='cont-pay pt-3 d-flex align-center payment justify-content-between flex-wrap gap-3'>
+                                <p className='mb-0 fs-4 text-center'>{total} €</p>
                                 <button type="">Procedi all'acquisto</button>
                             </div>
                         </form>
