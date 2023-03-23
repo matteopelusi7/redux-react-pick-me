@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAction } from '@reduxjs/toolkit'
+
+const removeFromCart = createAction('remove-from-cart')
 
 const initialState = {
     cart: [],
@@ -21,6 +23,15 @@ export const cartSlice = createSlice({
         state.payed = true
     }
   },
+  extraReducers: (builder) => {
+    builder
+    .addCase(removeFromCart, (state, action) => {
+        state.cart = state.cart.filter((el) => el.id !== action.payload.id)
+    })
+    .addDefaultCase((state) => {
+        return state
+    })
+  }
 })
 
 const addSingleItemToCart = (item) => (dispatch, getState) => {
@@ -35,6 +46,6 @@ const addSingleItemToCart = (item) => (dispatch, getState) => {
 
 export const { addToCart, cleanCart, payOrder } = cartSlice.actions
 
-export {addSingleItemToCart}
+export {addSingleItemToCart, removeFromCart}
 
 export default cartSlice.reducer

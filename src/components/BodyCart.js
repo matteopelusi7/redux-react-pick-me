@@ -1,7 +1,13 @@
 import React from 'react'
 import { RiDeleteBack2Fill } from "react-icons/ri";
+import { useDispatch, useSelector } from 'react-redux';
+import { cleanCart, removeFromCart } from '../redux/reducers/cart-reducer'
 
 const BodyCart = () => {
+
+  const dispatch = useDispatch()  
+  const { cart } = useSelector((store) => store.cart)
+
   return (
     <div className='my-5'>
         <div className='row mx-5'>
@@ -9,28 +15,32 @@ const BodyCart = () => {
         </div>
         <div className='row px-4 my-4 d-flex justify-content-between gap-3 flex-nowrap'>
             <div className='col-6 cart-collect d-flex flex-column p-3'>
-                <button className='remove-all pb-3'>
+                <button className='remove-all pb-3' onClick={() => dispatch(cleanCart())}>
                     <p className='text-end p-3 category'>Remove all</p>
                 </button>
-                <div className='container-buy d-flex justify-content-between pb-4'>
-                    <div className='d-flex align-items-center gap-3'>
-                        <div className='pr-3'>
-                            <img className='img-cart' src="https://images.unsplash.com/photo-1661956603025-8310b2e3036d?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwxODIyMTF8MXwxfGFsbHwxfHx8fHx8Mnx8MTY3OTQ4Mjg4MQ&ixlib=rb-4.0.3&q=80" height={'80px'} width={'150px'} alt="" />
-                        </div>
-                        <div className='d-flex gap-2 flex-column ml-2'>
-                            <div>
-                                <p className='category'>Categoria</p>
-                            </div>
+                {cart.map((el) => {
+                    return (
+                        <div className='container-buy d-flex justify-content-between pb-4'>
+                            <div className='d-flex align-items-center gap-3'>
+                                <div className='pr-3'>
+                                    <img className='img-cart' src={el.url} height={'80px'} width={'150px'} alt="" />
+                                </div>
+                            <div className='d-flex gap-2 flex-column ml-2'>
+                                <div>
+                                    <p className='category'>Categoria</p>
+                                </div>
                             <div>
                                 <p>Artista</p>
-                                <p>Titolo - 23 €</p>
+                                <p>Titolo - {el.likes} €</p>
                             </div>
                         </div>
-                    </div>
-                    <button className='mt-2 pr-4 remove-item'>
-                        <RiDeleteBack2Fill className='fs-5' />
-                    </button>
-                </div>
+                        </div>
+                            <button className='mt-2 pr-4 remove-item' onClick={() => dispatch(removeFromCart(el))}>
+                                <RiDeleteBack2Fill className='fs-5' />
+                            </button>
+                        </div>
+                    )
+                })}
             </div>
             
             <div className='col-6 cart-pay p-5 d-flex align-center flex-column justify-content-evenly gap-3'>
