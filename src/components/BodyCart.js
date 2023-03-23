@@ -6,7 +6,7 @@ import { cleanCart, removeFromCart } from '../redux/reducers/cart-reducer'
 const BodyCart = () => {
 
   const dispatch = useDispatch()  
-  const { cart } = useSelector((store) => store.cart)
+  const { cart, total } = useSelector((store) => store.cart)
 
   return (
     <div className='my-5'>
@@ -58,7 +58,7 @@ const BodyCart = () => {
                     <input type="text" name="" value="" placeholder='CAP' onChange={(e) => {return}} />
                 </div>
                 <div className='pt-3 d-flex align-center payment justify-content-between'>
-                    <p className='mb-0 fs-4'>23 €</p>
+                    <p className='mb-0 fs-4'>{total} €</p>
                     <button type="">Procedi all'acquisto</button>
                 </div>
             </div>

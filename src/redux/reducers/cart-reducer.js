@@ -2,6 +2,14 @@ import { createSlice, createAction } from '@reduxjs/toolkit'
 
 const removeFromCart = createAction('remove-from-cart')
 
+const isAddToCartAction = (action) => {
+    return action.type.endsWith('/addToCart')
+}
+
+const isRemovedFromCartAction = (action) => {
+    return action.type.endsWith('remove-from-cart')
+}
+
 const initialState = {
     cart: [],
     total: 0,
@@ -27,6 +35,12 @@ export const cartSlice = createSlice({
     builder
     .addCase(removeFromCart, (state, action) => {
         state.cart = state.cart.filter((el) => el.id !== action.payload.id)
+    })
+    .addMatcher(isAddToCartAction, (state, action) => {
+        state.total += action.payload.likes
+    })
+    .addMatcher(isRemovedFromCartAction, (state, action) => {
+        state.total -= action.payload.likes
     })
     .addDefaultCase((state) => {
         return state
