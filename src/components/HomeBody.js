@@ -61,7 +61,7 @@ const HomeBody = () => {
             </button>
           </div>
         </div>
-        <div className='col-4 request text-end pr-5'>
+        <div className='col-4 request text-end pr-5 pb-5'>
           <p className='fs-6'>{` Richieste: ${rate_limit.remaining}/${rate_limit.total} `}</p>
         </div>
         <div className='mt-5 d-flex flex-wrap'>

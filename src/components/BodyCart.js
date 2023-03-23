@@ -23,8 +23,8 @@ const BodyCart = () => {
         <div className='row mx-5'>
             <h2 className='cart-title col-12'>Carrello</h2>
         </div>
-        <div className='row px-4 my-4 d-flex justify-content-between gap-3 flex-nowrap'>
-            <div className='col-6 cart-collect d-flex flex-column p-3'>
+        <div className='row px-4 my-4 d-flex justify-content-between gap-3'>
+            <div className='col-12 col-md-6 cart-collect d-flex flex-column p-3 mb-3'>
                 <button className='remove-all pb-3' onClick={() => dispatch(cleanCart())}>
                     <p className='text-end p-3 category'>Remove all</p>
                 </button>
@@ -70,9 +70,9 @@ const BodyCart = () => {
                             dirty
                         }
                     ) => (
-                        <form onSubmit={handleSubmit} className='col-6 cart-pay p-5 d-flex align-center flex-column justify-content-evenly gap-3'>
-                            <h4 className='pb-3'>Dati di pagamento</h4>
-                            <div className='d-flex gap-3'>
+                        <form onSubmit={handleSubmit} className='col-12 col-md-6 cart-pay p-5 d-flex align-center flex-column justify-content-evenly gap-3'>
+                            <h4 className='pb-3 pt-3'>Dati di pagamento</h4>
+                            <div className='d-flex flex-wrap gap-3'>
                                 <input type="text" name="name" onBlur={handleBlur} value={values.name} placeholder='Nome' onChange={handleChange} />
                                 <input type="text" name="cognome" onBlur={handleBlur} value={values.cognome} placeholder='Cognome' onChange={handleChange} />
                             </div>
@@ -84,7 +84,7 @@ const BodyCart = () => {
                                 <input type="text" name="civico" onBlur={handleBlur} value={values.civico} placeholder='Numero' onChange={handleChange} />
                                 <input type="text" name="cap" onBlur={handleBlur} value={values.cap} placeholder='CAP' onChange={handleChange} />
                             </div>
-                            <div className='pt-3 d-flex align-center payment justify-content-between'>
+                            <div className='pt-3 d-flex align-center payment justify-content-between flex-wrap gap-3'>
                                 <p className='mb-0 fs-4'>{total} €</p>
                                 <button type="">Procedi all'acquisto</button>
                             </div>

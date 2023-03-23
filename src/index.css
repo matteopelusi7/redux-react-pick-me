@@ -151,7 +151,7 @@ img {
 }
 
 .cart-collect {
-  height: 500px;
+  min-height: 500px;
 }
 
 .cart-pay {
@@ -218,4 +218,13 @@ img {
   color: #ad3eff;
   cursor: pointer;
   transition: all 200ms ease-in-out;
+}
+
+@media all and (max-width: 767px) {
+  .card-w {
+    width: 90%;
+    height: 300px;
+    margin: 20px 7px;
+    position: relative;
+  }
 }
